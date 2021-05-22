@@ -1,9 +1,24 @@
 <template>
-  <b-container>{{ $auth.user.email }}</b-container>
+  <main-page>
+    <template #sidebar>
+      <sidebar />
+    </template>
+    <template #chat-area>
+      <nuxt-child />
+    </template>
+  </main-page>
 </template>
 
 <script>
-export default {}
+import MainPage from '@/components/ MainPage'
+import Sidebar from '~/components/siderbar/Sidebar'
+
+export default {
+  components: {
+    MainPage,
+    Sidebar,
+  },
+}
 </script>
 
 <style>
@@ -22,6 +37,7 @@ export default {}
   display: block;
   font-weight: 300;
   font-size: 100px;
+
   color: #35495e;
   letter-spacing: 1px;
 }
