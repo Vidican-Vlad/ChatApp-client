@@ -1,10 +1,13 @@
 <template>
   <vertical-align-in-page>
+    <div class="register">
+    <div class="login-text">Register</div><br>
     <b-form
       v-if="!showSuccessMessage"
       @submit.prevent="onSubmit"
       @reset="onReset"
     >
+      <div class="label_text">Email:</div>
       <b-form-group id="input-group-1" label-for="input-">
         <b-form-input
           id="input-1"
@@ -14,7 +17,7 @@
           required
         ></b-form-input>
       </b-form-group>
-
+      <div class="label_text">Username:</div>
       <b-form-group id="input-group-2" label-for="input-">
         <b-form-input
           id="input-2"
@@ -24,7 +27,7 @@
           required
         ></b-form-input>
       </b-form-group>
-
+      <div class="label_text">Password:</div>
       <b-form-group id="input-group-3" label-for="input-3">
         <b-form-input
           id="input-3"
@@ -34,7 +37,7 @@
           required
         ></b-form-input>
       </b-form-group>
-
+      <div class="label_text">Password Confirmation:</div>
       <b-form-group id="input-group-4" label-for="input-3">
         <b-form-input
           id="input-4"
@@ -52,10 +55,36 @@
           </b-alert>
         </div>
       </b-form-group>
+      <b-form-group>
+        <div class="label_text">Recovery Question:</div>
+        <b-form-select 
+          id="input-5"
+          v-model="form.question_id"
+          required
+        >
+          <option selected>Select question</option>
+          <option value="1">What was your first car?</option>
+          <option value="2">What is the name of your first pet?</option>
+          <option value="3">What is your mother's maiden name?</option>
+          <option value="4">What elementary school did you attend?</option>
+          <option value="5">What is the name of the town where you were born?</option>
+        </b-form-select>
+      </b-form-group>
+      <div class="form-group">
+        <div class="label_text">Recovery Answer:</div>
+        <b-form-input
+          id="input-6"
+          v-model="form.answer"
+          placeholder="Recovery Answer"
+          type="text"
+          required
+        ></b-form-input>
+      </div>
       <b-button type="submit" variant="primary">Submit</b-button>
       <b-button type="reset" variant="danger">Reset</b-button>
     </b-form>
     <b-alert v-else variant="success" show>{{ showSuccessMessage }}</b-alert>
+    </div>
   </vertical-align-in-page>
 </template>
 
@@ -72,6 +101,8 @@ export default {
         password: '',
         password_confirmation: '',
         email: '',
+        question_id: '',
+        answer: '',
       },
       showSuccessMessage: false,
     }
@@ -94,18 +125,56 @@ export default {
         })
         this.showSuccessMessage = message
         this.onReset()
+        this.$router.push({
+          name:'auth-login'
+        })
       } catch (e) {
         console.log(e)
       }
     },
     onReset() {
+      console.log(this.form)
       this.form = {
         username: '',
         password: '',
         password_confirmation: '',
         email: '',
+        question_id: '',
+        answer: '',
       }
     },
   },
 }
 </script>
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #17a2b8;
+  height: 100vh;
+}
+.register{
+  display: block;
+  background-color: #fffffff1;
+  margin: 2rem 0 4rem 0;
+  padding: 1rem;
+  padding-top: 0;
+  position: relative;
+  min-width: 10%;
+  width: 40%;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 1rem;
+  color: #17a2b8;
+  border: 1px solid #9C9C9C;
+  border-radius: 7px;
+}
+.label_text{
+  text-align: left;
+  font-size: 17px;
+}
+.login-text{
+  font-size: 30px;
+  padding-top: 20px;
+}
+</style>
