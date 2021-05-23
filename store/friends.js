@@ -43,12 +43,34 @@ export const actions = {
   },
 
   async addFriend({ dispatch }, friendNameToAdd) {
-    await this.$axios.post('/add-friend', {
+    await this.$axios.post('/send-friend-request', {
       name: friendNameToAdd,
     })
 
     // await dispatch('getFriendsList')
     // await dispatch('getFriendsRequestList')
+    await Promise.all([
+      dispatch('getFriendsList'),
+      dispatch('getFriendsRequestList'),
+    ])
+  },
+
+  async acceptRequest({ dispatch }, userAccepted){
+    await this.$axios.post('/accept-friend-request', {
+      name: userAccepted,
+    })
+
+    await Promise.all([
+      dispatch('getFriendsList'),
+      dispatch('getFriendsRequestList'),
+    ])
+  },
+
+  async rejectRequest({ dispatch }, userRejected){
+    await this.$axios.post('/reject-friend-request', {
+      name: userRejected,
+    })
+
     await Promise.all([
       dispatch('getFriendsList'),
       dispatch('getFriendsRequestList'),

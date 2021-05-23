@@ -8,19 +8,19 @@
     </div>
     <b-button
       size="sm"
-      class="mb-2"
-      variant="Succes"
-      @click.prevent="acceptRequest"
+      class="ml-1"
+      variant="success"
+      @click.prevent="acceptFriend"
     >
       <b-icon icon="check2" />
     </b-button>
     <b-button
       size="sm"
-      class="mb-2"
-      variant="Danger"
-      @click.prevent="rejectFriendRequest"
+      class="ml-1"
+      variant="danger"
+      @click.prevent="rejectFriend"
     >
-      <b-icon icon="x-lg" />
+      <b-icon icon="x-square" />
     </b-button>
   </div>
 </template>
@@ -41,17 +41,20 @@ export default {
     },
   },
   methods: {
-    async acceptRequest() {
+    async acceptFriend() {
       try {
-        await this.$axios.post('/accept-request', {
-          ...this.form,
-        })
-        this.$emit('friend-request-accepted', this.request)
+        await this.$store.dispatch('friends/acceptRequest', this.form.name)
       } catch (e) {
         console.log(e)
       }
     },
-    rejectFriendRequest() {},
+    async rejectFriend() {
+      try {
+        await this.$store.dispatch('friends/rejectRequest', this.form.name)
+      } catch (e) {
+        console.log(e)
+      }
+    },
   },
 }
 </script>
@@ -65,14 +68,13 @@ export default {
 
   &__name {
     font-size: 20px;
-    margin-left: 20px;
+    margin-left: 10px;
     border-bottom: 1px solid #e2e2e2;
     flex: 1;
   }
 
   &__icon {
-    font-size: 20px;
-    flex: 0 0 64px;
+    flex: 0 0 20px;
   }
 }
 </style>

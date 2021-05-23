@@ -1,8 +1,8 @@
 <template>
-  <div class="Pending-list">
+  <div class="pending-list">
     <ul v-if="!!requestsList.length" class="pending-list__container">
       <li v-for="request in requests" :key="request.id">
-        <PendingItem
+        <pending-item
           :request="request"
           @friend-request-accepted="updatePendingList"
         />
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
-.friend-list {
+.pending-list {
   max-height: 100%;
   overflow-y: auto;
 
