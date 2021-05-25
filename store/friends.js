@@ -1,6 +1,7 @@
 export const state = () => ({
   friendsList: [],
   friendRequestsList: [],
+  potentialMembers: [],
 })
 
 export const getters = {
@@ -16,6 +17,12 @@ export const getters = {
   friendsRequestListCount(state) {
     return state.friendRequestsList.length
   },
+  potentialMembers(state) {
+    return state.potentialMembers
+  },
+  potentialMembersCount(state) {
+    return state.potentialMembers.length
+  },
 }
 
 export const mutations = {
@@ -25,6 +32,9 @@ export const mutations = {
   SET_FRIEND_REQUEST_LIST(state, payload) {
     state.friendRequestsList = payload
   },
+  SET_POTENTIAL_MEMBERS_LIST(state, payload) {
+    state.potentialMembers = payload
+  },
 }
 
 export const actions = {
@@ -32,6 +42,12 @@ export const actions = {
     const response = await this.$axios.$get('/user-friends')
 
     commit('SET_FRIENDS_LIST', response)
+  },
+
+  async getPotentialMembersList({ commit }, roomId) {
+    const response = await this.$axios.$get(`/get-potential-members/${roomId}`)
+
+    commit('SET_POTENTIAL_MEMBERS_LIST', response)
   },
 
   async deleteFriend({ dispatch }, friend) {
@@ -55,7 +71,7 @@ export const actions = {
     ])
   },
 
-  async acceptRequest({ dispatch }, userAccepted){
+  async acceptRequest({ dispatch }, userAccepted) {
     await this.$axios.post('/accept-friend-request', {
       name: userAccepted,
     })
@@ -66,7 +82,7 @@ export const actions = {
     ])
   },
 
-  async rejectRequest({ dispatch }, userRejected){
+  async rejectRequest({ dispatch }, userRejected) {
     await this.$axios.post('/reject-friend-request', {
       name: userRejected,
     })

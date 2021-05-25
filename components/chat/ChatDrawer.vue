@@ -1,6 +1,8 @@
 <template>
   <b-card class="chat-drawer" no-body>
-    <template #header></template>
+    <template #header>
+      <chat-header :roomId="roomId" />
+    </template>
     <template #default>
       <chat-messages-list
         :messages="messages"
@@ -14,6 +16,7 @@
 </template>
 
 <script>
+import ChatHeader from '@/components/chat/ChatHeader'
 import ChatInput from '~/components/chat/ChatInput'
 import ChatMessagesList from '~/components/chat/ChatMessagesList'
 
@@ -31,6 +34,7 @@ export default {
   components: {
     ChatInput,
     ChatMessagesList,
+    ChatHeader,
   },
   data() {
     return {
@@ -38,6 +42,7 @@ export default {
     }
   },
   async mounted() {
+    console.log(this.roomId)
     const response = await this.$axios.get(`/room-messages/${this.roomId}`)
 
     console.log(response)

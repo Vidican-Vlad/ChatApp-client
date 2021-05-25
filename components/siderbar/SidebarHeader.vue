@@ -29,10 +29,7 @@
           </b-form-group>
         </b-form>
         <template #modal-footer>
-          <b-button size="sm" variant="success" @click.prevent="joinRoom">
-            Join
-          </b-button>
-          <b-button size="sm" variant="primary" @click.prevent="onSubmit">
+          <b-button size="sm" variant="success" @click.prevent="onSubmit">
             Create
           </b-button>
           <b-button size="sm" variant="danger" @click.prevent="leaveRoom">
@@ -96,20 +93,6 @@ export default {
         name: '',
       }
       this.showSuccessMessage = false
-    },
-    async joinRoom() {
-      try {
-        const {
-          data: { room },
-        } = await this.$axios.post('/join-room', {
-          ...this.form,
-        })
-        this.onReset()
-        this.$bvModal.hide('modal-center')
-        this.$emit('room-joined', room)
-      } catch (e) {
-        console.log(e)
-      }
     },
     async leaveRoom() {
       try {
