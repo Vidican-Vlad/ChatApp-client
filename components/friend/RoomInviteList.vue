@@ -1,10 +1,10 @@
 <template>
-  <div class="pending-list">
-    <ul v-if="!!requestsList.length" class="pending-list__container">
+  <div class="room-invite-list">
+    <ul v-if="!!requestsList.length" class="room-invite-list__container">
       <li v-for="request in requests" :key="request.id">
-        <pending-item
+        <room-invite-item
           :request="request"
-          @friend-request-accepted="updatePendingList"
+          @room-request-accepted="updatePendingList"
         />
       </li>
     </ul>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import PendingItem from '@/components/friend/PendingItem'
+import RoomInviteItem from '@/components/friend/RoomInviteItem'
 
 export default {
   props: {
@@ -23,7 +23,7 @@ export default {
     },
   },
   components: {
-    PendingItem,
+    RoomInviteItem,
   },
   computed: {
     requestsList() {
@@ -44,7 +44,7 @@ export default {
 </script>
 
 <style lang="scss">
-.pending-list {
+.room-invite-list {
   max-height: 100%;
   overflow-y: auto;
 

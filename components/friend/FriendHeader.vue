@@ -10,6 +10,13 @@
       size="sm"
       class="mb-2"
       variant="secondary"
+      to="/settings/room-invite"
+      >Room Invites
+    </b-button>
+    <b-button
+      size="sm"
+      class="mb-2"
+      variant="secondary"
       v-b-modal.modal-center-2
     >
       <b-icon icon="person-plus" />

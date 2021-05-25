@@ -1,16 +1,16 @@
 <template>
-  <div class="room-invite-item">
-    <div class="room-invite__icon">
+  <div class="pending-item">
+    <div class="pending-item__icon">
       <b-icon icon="person-square" font-scale="1" />
     </div>
-    <div class="room-invite__name">
-      {{ request.username }}
+    <div class="pending-item__name">
+      {{ request.name }}
     </div>
     <b-button
       size="sm"
       class="ml-1"
       variant="success"
-      @click.prevent="acceptFriend"
+      @click.prevent="acceptInvite"
     >
       <b-icon icon="check2" />
     </b-button>
@@ -18,7 +18,7 @@
       size="sm"
       class="ml-1"
       variant="danger"
-      @click.prevent="rejectFriend"
+      @click.prevent="rejectInvite"
     >
       <b-icon icon="x-square" />
     </b-button>
@@ -30,7 +30,7 @@ export default {
   data() {
     return {
       form: {
-        name: this.request.username,
+        name: this.request.name,
       },
     }
   },
@@ -41,16 +41,27 @@ export default {
     },
   },
   methods: {
-    async acceptFriend() {
+    async acceptInvite() {
+      console.log(this.request.id)
       try {
-        await this.$store.dispatch('friends/acceptRequest', this.form.name)
+        await this.$axios.$post('/accept-room-invite', {
+          id: this.request.id,
+        })
+        await Promise.all([
+          this.$store.dispatch('rooms/getRoomList'),
+          this.$store.dispatch('rooms/getRoomInviteList'),
+        ])
       } catch (e) {
         console.log(e)
       }
     },
-    async rejectFriend() {
+    async rejectInvite() {
+      console.log(this.request.id)
       try {
-        await this.$store.dispatch('friends/rejectRequest', this.form.name)
+        await this.$axios.$post('/reject-room-invite', {
+          id: this.request.id,
+        })
+        await this.$store.dispatch('rooms/getRoomInviteList')
       } catch (e) {
         console.log(e)
       }
@@ -60,7 +71,7 @@ export default {
 </script>
 
 <style lang="scss">
-.room-invite {
+.pending-item {
   display: flex;
   padding: 10px 15px;
   text-decoration: none;
