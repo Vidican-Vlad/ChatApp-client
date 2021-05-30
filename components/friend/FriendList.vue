@@ -8,7 +8,6 @@
         />
       </li>
     </ul>
-    <span v-else>Add friends</span>
   </div>
 </template>
 
@@ -37,8 +36,10 @@ export default {
 .friend-list {
   max-height: 100%;
   overflow-y: auto;
+  background-color: #d3d5d4;
 
   &__container {
+    background-color: #d3d5d4;
     list-style: none;
     padding: 0;
     margin: 0;

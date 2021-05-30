@@ -2,6 +2,7 @@ export const state = () => ({
   friendsList: [],
   friendRequestsList: [],
   potentialMembers: [],
+  groupMembers: [],
 })
 
 export const getters = {
@@ -23,6 +24,12 @@ export const getters = {
   potentialMembersCount(state) {
     return state.potentialMembers.length
   },
+  groupMembers(state) {
+    return state.groupMembers
+  },
+  groupMembersCount(state) {
+    return state.groupMembers.length
+  },
 }
 
 export const mutations = {
@@ -34,6 +41,9 @@ export const mutations = {
   },
   SET_POTENTIAL_MEMBERS_LIST(state, payload) {
     state.potentialMembers = payload
+  },
+  SET_GROUP_MEMBERS(state, payload) {
+    state.groupMembers = payload
   },
 }
 
@@ -97,5 +107,10 @@ export const actions = {
     const response = await this.$axios.$get('/user-requests')
 
     commit('SET_FRIEND_REQUEST_LIST', response)
+  },
+  async getGroupMembers({ commit }, roomId) {
+    const response = await this.$axios.$get(`/get-group-members/${roomId}`)
+
+    commit('SET_GROUP_MEMBERS', response)
   },
 }

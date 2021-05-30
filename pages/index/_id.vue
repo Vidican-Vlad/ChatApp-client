@@ -1,5 +1,5 @@
 <template>
-  <chat-drawer :room-id="roomId" :key="roomId" />
+  <chat-drawer :room-id="roomId" :key="roomId" :type="'room'" />
 </template>
 
 <script>

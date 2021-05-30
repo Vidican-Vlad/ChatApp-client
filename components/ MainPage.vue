@@ -11,7 +11,7 @@
 
 <style lang="scss">
 body {
-  background-color: #17a2b8;
+  background-color: #2a3d45;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
@@ -33,10 +33,12 @@ body {
   &__sidebar {
     border-right: 1px solid #2a2827;
     max-height: inherit;
+    background-color: #d3d5d4;
     overflow: hidden;
   }
   &__chat-area {
     max-height: 100%;
+    background-color: #d3d5d4;
     overflow: hidden;
   }
 }

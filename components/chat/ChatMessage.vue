@@ -49,7 +49,7 @@ export default {
 
   &__container {
     padding: 10px 14px;
-    background: #eee;
+    background: #e9ebec;
     border-radius: 9px;
     display: inline-block;
     text-align: left;
@@ -61,7 +61,7 @@ export default {
     &--owner {
       text-align: right;
       #{$main}__container {
-        background: rgb(171, 236, 245);
+        background: #94c7b4;
       }
     }
   }

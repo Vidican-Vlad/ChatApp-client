@@ -29,7 +29,6 @@ export default {
     async fetchRooms() {
       this.isLoadingRooms = true
       await this.$store.dispatch('rooms/getRoomList')
-      await this.$store.dispatch('dms/getDmsList')
       this.isLoadingRooms = false
     },
     newRoomCreated(newRoom) {

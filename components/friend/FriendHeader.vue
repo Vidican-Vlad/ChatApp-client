@@ -1,28 +1,29 @@
 <template>
   <div class="friend-header">
-    <b-button size="sm" class="mb-2" variant="secondary" to="/settings/friends"
+    <b-button size="sm" class="ml-1" variant="dark" to="/settings/friends"
       >Friends {{ friendsListCount }}
     </b-button>
-    <b-button size="sm" class="mb-2" variant="secondary" to="/settings/pending"
+    <b-button size="sm" class="ml-1" variant="dark" to="/settings/pending"
       >Pending {{ friendsRequestListCount }}
     </b-button>
-    <b-button
-      size="sm"
-      class="mb-2"
-      variant="secondary"
-      to="/settings/room-invite"
-      >Room Invites
+    <b-button size="sm" class="ml-1" variant="dark" to="/settings/room-invite"
+      >Room Invites {{ roomListInviteCount }}
     </b-button>
-    <b-button
-      size="sm"
-      class="mb-2"
-      variant="secondary"
-      v-b-modal.modal-center-2
-    >
+    <b-button size="sm" class="ml-1" variant="dark" v-b-modal.modal-center-2>
       <b-icon icon="person-plus" />
       Add Friend
     </b-button>
-    <b-modal id="modal-center-2" centered title="Add friend">
+    <b-modal
+      id="modal-center-2"
+      centered
+      title="Add friend"
+      header-bg-variant="secondary"
+      header-text-variant="dark"
+      body-bg-variant="secondary"
+      body-text-variant="dark"
+      footer-bg-variant="secondary"
+      footer-text-variant="dark"
+    >
       <b-form @submit.prevent>
         <b-form-group id="input-group-1" label-for="input-">
           <b-form-input
@@ -72,6 +73,7 @@ export default {
   },
   computed: {
     ...mapGetters('friends', ['friendsListCount', 'friendsRequestListCount']),
+    ...mapGetters('rooms', ['roomListInviteCount']),
   },
 }
 </script>
@@ -82,7 +84,6 @@ export default {
   display: flex;
   width: 100%;
   vertical-align: baseline;
-  background: #eee;
-  border-radius: 7px;
+  background: #7f898d;
 }
 </style>
