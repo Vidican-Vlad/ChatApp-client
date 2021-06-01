@@ -1,22 +1,27 @@
 <template>
   <div class="sidebar-header">
     <div class="sidebar-header__icon-user">
-      <b-icon
-        font-scale="2"
-        class="sidebar-header__icon"
-        icon="emoji-sunglasses"
-      />
       <span class="sidebar-header__user">{{ username }} </span>
       <br />
       <b-button
         size="sm"
         class="mb-2 sidebar-header_icon-menu"
-        variant="secondary"
+        variant="dark"
         v-b-modal.modal-center
       >
         <b-icon icon="plus-square" />
       </b-button>
-      <b-modal id="modal-center" centered title="Create or join room">
+      <b-modal
+        id="modal-center"
+        centered
+        title="Create or join room"
+        header-bg-variant="secondary"
+        header-text-variant="dark"
+        body-bg-variant="secondary"
+        body-text-variant="dark"
+        footer-bg-variant="secondary"
+        footer-text-variant="dark"
+      >
         <b-form v-if="!showSuccessMessage">
           <b-form-group id="input-group-1" label-for="input-">
             <b-form-input
@@ -40,7 +45,7 @@
       <b-button
         size="sm"
         class="mb-2 sidebar-header_icon-menu"
-        variant="secondary"
+        variant="dark"
         to="/settings/friends"
       >
         <b-icon icon="person-lines-fill" />
@@ -123,9 +128,8 @@ export default {
   padding: 10px 15px;
   display: flex;
   vertical-align: baseline;
-  background: #eee;
+  background: #7f898d;
   transition: 0.3s ease;
-  border-radius: 7px;
 
   &__icon-user {
     width: 100%;
@@ -139,7 +143,7 @@ export default {
 
   &__user {
     font-size: 20px;
-    color: gray;
+    color: #d3d5d4;
   }
 
   &__icon,

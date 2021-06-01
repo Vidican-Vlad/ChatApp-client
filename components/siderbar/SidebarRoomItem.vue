@@ -1,5 +1,9 @@
 <template>
-  <nuxt-link class="sidebar-room-item" :to="roomPath">
+  <nuxt-link
+    class="sidebar-room-item"
+    style="text-decoration: none; color: inherit"
+    :to="roomPath"
+  >
     <div class="sidebar-room-item__icon">
       <b-icon icon="people-fill" font-scale="1" />
     </div>
@@ -29,23 +33,27 @@ export default {
   padding: 10px 15px;
   text-decoration: none;
   vertical-align: baseline;
-  transition: .3s ease;
+  transition: 0.3s ease;
+  color: #d3d5d4;
 
   &__name {
     font-size: 20px;
     margin-left: 20px;
-    border-bottom: 1px solid #e2e2e2;
+    border-bottom: 1px solid;
     flex: 1;
   }
 
   &__icon {
     font-size: 20px;
-    flex: 0 0 64px;
+    flex: 0 0 20px;
   }
   &__icon,
   &__name {
-    color:black;
+    color: black;
   }
-  
+  &:hover {
+    background-color: #7f898d;
+    cursor: pointer;
+  }
 }
 </style>

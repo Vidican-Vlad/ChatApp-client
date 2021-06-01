@@ -1,7 +1,8 @@
 <template>
   <vertical-align-in-page>
     <div class="login">
-      <div class="login-text"> Log In</div><br>
+      <div class="login-text">Log In</div>
+      <br />
       <div class="label_text">Username:</div>
       <b-form @submit.prevent="onSubmit" @reset="onReset">
         <b-form-group id="input-group-1" label-for="input-">
@@ -24,21 +25,24 @@
             required
           ></b-form-input>
         </b-form-group>
-          <b-row>
-            <b-col class="text-left"><b-form-checkbox value="me">Remember me</b-form-checkbox>
+        <b-row>
+          <b-col class="text-left"
+            ><b-form-checkbox value="me">Remember me</b-form-checkbox>
             <b-form-group id="input-group-4" v-slot="{ ariaDescribedby }">
               <b-form-checkbox-group
                 v-model="form.checked"
                 id="checkboxes-4"
                 :aria-describedby="ariaDescribedby"
               >
-              </b-form-checkbox-group>
-            </b-form-group></b-col>
-            <a class="text_left" href="/auth/register">Register here</a><br>
-            </b-row>
-            <b-row>
-              <b-col class="text-left" value="me" ><b-button type="submit" variant="primary">Submit</b-button></b-col>
-            </b-row>
+              </b-form-checkbox-group> </b-form-group
+          ></b-col>
+          <a class="text_left" href="/auth/register">Register here</a><br />
+        </b-row>
+        <b-row>
+          <b-col class="text-left" value="me"
+            ><b-button type="submit" variant="primary">Submit</b-button></b-col
+          >
+        </b-row>
       </b-form>
     </div>
   </vertical-align-in-page>
@@ -69,7 +73,7 @@ export default {
             password: this.form.password,
           },
         })
-        await this.$router.replace('/')
+        await this.$router.replace('/settings/friends')
       } catch (e) {
         console.log(e)
       }
@@ -79,23 +83,24 @@ export default {
 }
 </script>
 <style>
-html, body {
+html,
+body {
   margin: 0;
   padding: 0;
-  background-color: #17a2b8;
+  background-color: #2a3d45;
   height: 100vh;
 }
-.label_text{
+.label_text {
   text-align: left;
   font-size: 17px;
 }
-.login-text{
+.login-text {
   font-size: 30px;
   padding-top: 20px;
 }
 .login {
   display: block;
-  background-color: #fffffff1;
+  background-color: #d3d5d4;
   margin: 2rem 0 4rem 0;
   padding: 1rem;
   padding-top: 0;
@@ -105,11 +110,11 @@ html, body {
   text-align: center;
   margin: 0;
   margin-bottom: 1rem;
-  color: #17a2b8;
-  border: 1px solid #9C9C9C;
+  color: #7f898d;
+  border: 1px solid #9c9c9c;
   border-radius: 7px;
 }
-.text_left{
+.text_left {
   padding-right: 1rem;
 }
 </style>

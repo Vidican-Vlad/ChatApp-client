@@ -1,7 +1,7 @@
 <template>
-  <b-card class="chat-drawer" no-body>
+  <b-card bg-variant="secondary" class="chat-drawer" no-body>
     <template #header>
-      <chat-header :roomId="roomId" />
+      <chat-header v-if="shouldShowHeader" :roomId="roomId" />
     </template>
     <template #default>
       <chat-messages-list
@@ -24,11 +24,12 @@ export default {
   props: {
     roomId: {
       type: String,
-      required: true,
+    },
+    friendshipId: {
+      type: String,
     },
     type: {
       type: String,
-      default: 'dm',
     },
   },
   components: {
@@ -41,37 +42,79 @@ export default {
       messages: [],
     }
   },
+  computed: {
+    shouldShowHeader() {
+      return this.type === 'room'
+    },
+  },
   async mounted() {
-    console.log(this.roomId)
-    const response = await this.$axios.get(`/room-messages/${this.roomId}`)
+    if (this.type === 'room') {
+      console.log(this.roomId)
+      const response = await this.$axios.get(`/room-messages/${this.roomId}`)
 
-    console.log(response)
+      console.log(response)
 
-    this.messages = response.data
+      this.messages = response.data
 
-    const chat = this.$ws.subscribe(`chat:${this.roomId}`)
+      const chat = this.$ws.subscribe(`chat:${this.roomId}`)
 
-    chat.on('ready', () => {})
+      chat.on('ready', () => {})
 
-    chat.on('message', (message) => {
-      this.messages.push(message)
-    })
+      chat.on('message', (message) => {
+        this.messages.push(message)
+      })
 
-    chat.on('error', (error) => {
-      console.log(error)
-    })
+      chat.on('error', (error) => {
+        console.log(error)
+      })
 
-    chat.on('close', () => {})
+      chat.on('close', () => {})
+    } else {
+      console.log(this.friendshipId)
+      const response = await this.$axios.get(
+        `/dm-messages/${this.friendshipId}`
+      )
+
+      console.log(response)
+
+      this.messages = response.data
+
+      const chat = this.$ws.subscribe(`dm:${this.friendshipId}`)
+
+      chat.on('ready', () => {})
+
+      chat.on('message', (message) => {
+        this.messages.push(message)
+      })
+
+      chat.on('error', (error) => {
+        console.log(error)
+      })
+
+      chat.on('close', () => {})
+    }
   },
   destroyed() {
-    this.$ws.getSubscription(`chat:${this.roomId}`).close()
+    if (this.type === 'room') {
+      this.$ws.getSubscription(`chat:${this.roomId}`).close()
+    } else {
+      this.$ws.getSubscription(`dm:${this.friendshipId}`).close()
+    }
   },
   methods: {
     onSubmitMessage(newMessage) {
-      this.$ws.getSubscription(`chat:${this.roomId}`).emit('message', {
-        message: newMessage,
-        senderId: this.$auth.user.id,
-      })
+      if (this.type === 'room') {
+        this.$ws.getSubscription(`chat:${this.roomId}`).emit('message', {
+          message: newMessage,
+          senderId: this.$auth.user.id,
+        })
+      } else {
+        this.$ws.getSubscription(`dm:${this.friendshipId}`).emit('message', {
+          message: newMessage,
+          senderId: this.$auth.user.id,
+        })
+        console.log(newMessage)
+      }
     },
   },
 }

@@ -8,7 +8,6 @@
         />
       </li>
     </ul>
-    <span v-else>Add friends</span>
   </div>
 </template>
 
@@ -47,9 +46,11 @@ export default {
 .room-invite-list {
   max-height: 100%;
   overflow-y: auto;
+  background-color: #d3d5d4;
 
   &__container {
     list-style: none;
+    background-color: #d3d5d4;
     padding: 0;
     margin: 0;
   }

@@ -12,7 +12,7 @@ export default {
 <style>
 .vertical-align {
   margin: 0 auto;
-  min-height: 75vh;
+  min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;

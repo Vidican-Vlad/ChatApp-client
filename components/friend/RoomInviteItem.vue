@@ -1,9 +1,9 @@
 <template>
-  <div class="pending-item">
-    <div class="pending-item__icon">
+  <div class="room-invite-item">
+    <div class="room-invite-item__icon">
       <b-icon icon="person-square" font-scale="1" />
     </div>
-    <div class="pending-item__name">
+    <div class="room-invite-item__name">
       {{ request.name }}
     </div>
     <b-button
@@ -71,21 +71,27 @@ export default {
 </script>
 
 <style lang="scss">
-.pending-item {
+.room-invite-item {
   display: flex;
   padding: 10px 15px;
   text-decoration: none;
   vertical-align: baseline;
+  color: black;
 
   &__name {
     font-size: 20px;
-    margin-left: 10px;
-    border-bottom: 1px solid #e2e2e2;
+    margin-left: 20px;
+    border-bottom: 1px solid black;
     flex: 1;
   }
 
   &__icon {
+    font-size: 20px;
     flex: 0 0 20px;
+  }
+  &:hover {
+    background-color: #7f898d;
+    cursor: pointer;
   }
 }
 </style>
